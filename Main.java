@@ -1,18 +1,46 @@
 import java.util.*;
+import java.util.function.*;
 
 class Main {
+  /**
+   * An ordered pair consisting of a sorting algorithm and a human-readable
+   * name for that sorting algorithm.
+   */
+  private static class SortingAlgorithmWithName {
+    Consumer<TestInteger[]> algorithm;
+    String name;
+
+    SortingAlgorithmWithName(
+        Consumer<TestInteger[]> algorithm,
+        String name) {
+      this.algorithm = algorithm;
+      this.name = name;
+    }
+  }
+
   public static void main(String[] args) {
+    SortingAlgorithmWithName[] algorithms = {
+      new SortingAlgorithmWithName(
+        array -> { Quicksorts.simpleQuicksort(array, 0, array.length - 1); },
+        "simple quicksort"),
+      new SortingAlgorithmWithName(
+        Arrays::sort,
+        "timsort"),
+    };
+
     System.out.println("=== Testing sorting an entirely random array:");
     for (int trial = 1; trial <= 5; trial++) {
       System.out.println("Trial " + trial + ":");
-      testSorting(randomArray(10_000));
+      testSorting(randomArray(10_000), algorithms);
     }
+    System.out.println();
 
     System.out.println("=== Testing sorting an already-sorted array:");
     for (int trial = 1; trial <= 5; trial++) {
       System.out.println("Trial " + trial + ":");
-      testSorting(orderedArray(10_000, 1));
+      testSorting(orderedArray(10_000, 1), algorithms);
     }
+    System.out.println();
 
     System.out.println("=== Testing sorting a multiple-sorted array (10 sorted sections):");
     for (int trial = 1; trial <= 5; trial++) {
@@ -31,10 +59,11 @@ class Main {
           // all 1_000 elements of the subarray.
           1_000);
       }
-      testSorting(multipleSortedArray10);
+      testSorting(multipleSortedArray10, algorithms);
     }
+    System.out.println();
 
-    System.out.println("=== Testing sorting a mutliple-sorted array (100 sorted sections):");
+    System.out.println("=== Testing sorting a multiple-sorted array (100 sorted sections):");
     for (int trial = 1; trial <= 5; trial++) {
       System.out.println("Trial " + trial + ":");
       TestInteger[] multipleSortedArray100 = new TestInteger[10_000];
@@ -51,91 +80,81 @@ class Main {
           // all 100 elements of the subarray.
           100);
       }
-      testSorting(multipleSortedArray100);
+      testSorting(multipleSortedArray100, algorithms);
     }
   }
 
   /**
-   * See whether quicksort or timsort is faster at sorting a given array.
-   */
-  public static void testSorting(TestInteger[] arrayToSort) {
-    // Set up
-    TestInteger[] quicksortArray = Arrays.copyOf(arrayToSort, arrayToSort.length);
-    TestInteger[] timsortArray =  Arrays.copyOf(quicksortArray, quicksortArray.length);
-
-    // Reset the "number of comparisons" counter.
-    TestInteger.counter = 0;
-    long quicksortStartTime = System.currentTimeMillis();
-    quicksort(quicksortArray, 0, quicksortArray.length - 1);
-    long quicksortEndTime = System.currentTimeMillis();
-
-    long quicksortTimeMillis = quicksortEndTime - quicksortStartTime;
-    long quicksortComparisons = TestInteger.counter;
-
-    TestInteger.counter = 0;
-    long timsortStartTime = System.currentTimeMillis();
-    Arrays.sort(timsortArray);
-    long timsortEndTime = System.currentTimeMillis();
-
-    long timsortTimeMillis = timsortEndTime - timsortStartTime;
-    long timsortComparisons = TestInteger.counter;
-
-    if (isSorted(quicksortArray)) {
-      System.out.println("The quicksort worked!");
-    } else {
-      System.out.println("The quicksort failed :(");
-    }
-
-    System.out.printf(
-      "The quicksort ran in %d milliseconds and took %d comparisons\n",
-      quicksortTimeMillis,
-      quicksortComparisons);
-
-    System.out.printf(
-      "The timsort ran in %d milliseconds and took %d comparisons\n",
-      timsortTimeMillis,
-      timsortComparisons);
-  }
-
-  /**
-   * Sort an array of TestIntegers using the quicksort algorithm.
+   * See which of a set of algorithms is faster at sorting a given array.
    *
-   * (This function sorts a sub-range of the array from p up to and including r.)
+   * Also keep track of how many comparisons each algorithm made.
+   *
+   * This function doesn't return anything, but it does print its results to
+   * the standard output.
    */
-  public static void quicksort(TestInteger[] array, int p, int r) {
-    if (p < r) {
-      int pivotLocation = partition(array, p, r);
-      quicksort(array, p, pivotLocation-1);
-      quicksort(array, pivotLocation+1, r);
-    }
-  }
+  public static void testSorting(
+      TestInteger[] arrayToSort,
+      SortingAlgorithmWithName[] algorithmsAndNames) {
 
-  /**
-   * For the sub-range of the arary from indices p to r inclusive:
-   *
-   * Break the range into three groups: a pivot element, all the elements less
-   * than the pivot, and all of the elements greater than the pivot. Reorder the
-   * range so that the smaller elements come first, then the pivot, then the
-   * bigger elements.
-   *
-   * Return the new index of the pivot element.
-   */
-  public static int partition(TestInteger[] array, int p, int r) {
-    TestInteger pivot = array[r];
-    int i = p-1;
-    int j;
-    for(j = p; j <= r-1; j++){
-      if(array[j].compareTo(pivot) <= 0){
-        i = i+1;
-        TestInteger temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+    class Result {
+      boolean didSucceed;
+      long millis;
+      long numberOfComparisons;
+
+      Result(boolean didSucceed, long millis, long numberOfComparisons) {
+        this.didSucceed = didSucceed;
+        this.millis = millis;
+        this.numberOfComparisons = numberOfComparisons;
       }
     }
-    TestInteger temp = array[i+1];
-    array[i+1]=array[r];
-    array[r]=temp;
-    return i+1;
+
+    // We could always print out the results as we go, but I'd like to put all
+    // of the success-and-failure messages in one place and all of the
+    // performace metrics in another place. (It's easier to read that way 🙂)
+    // In order to do that, we need to keep track of the behavior of each
+    // algorithm and then print them all out at the end.
+    Result[] results = new Result[algorithmsAndNames.length];
+
+    for (int i = 0; i < algorithmsAndNames.length; i++) {
+      Consumer<TestInteger[]> algorithm = algorithmsAndNames[i].algorithm;
+      String name = algorithmsAndNames[i].name;
+
+      // Set up the array to be sorted.
+      TestInteger[] copyOfArray =
+        Arrays.copyOf(arrayToSort, arrayToSort.length);
+
+      // Reset the "number of comparisons" counter.
+      TestInteger.counter = 0;
+
+      long startTime = System.currentTimeMillis();
+      algorithm.accept(copyOfArray);
+      long endTime = System.currentTimeMillis();
+
+      results[i] = new Result(
+        isSorted(copyOfArray),
+        endTime - startTime,
+        TestInteger.counter);
+    }
+
+    // Now, print out all of the results.
+
+    for (int i = 0; i < results.length; i++) {
+      if (results[i].didSucceed) {
+        System.out.printf("\tThe %s worked.\n", algorithmsAndNames[i].name);
+      } else {
+        System.out.printf("\tThe %s failed :(\n", algorithmsAndNames[i].name);
+      }
+    }
+
+    System.out.println("\t---");
+
+    for (int i = 0; i < results.length; i++) {
+      System.out.printf(
+        "\tThe %s ran in %d milliseconds and took %d comparisons\n",
+        algorithmsAndNames[i].name,
+        results[i].millis,
+        results[i].numberOfComparisons);
+    }
   }
 
   /**
