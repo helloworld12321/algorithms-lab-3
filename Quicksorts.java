@@ -10,6 +10,8 @@ public class Quicksorts {
    * any optimizations.
    *
    * (This function sorts a sub-range of the array from p up to and including r.)
+   *
+   * @author Equal contributions from all partners
    */
   public static void simpleQuicksort(TestInteger[] array, int p, int r) {
     if (p < r) {
@@ -31,6 +33,8 @@ public class Quicksorts {
    * bigger elements.
    *
    * Return the new index of the pivot element.
+   *
+   * @author Contributions from all partners, especially Tyler Rowland
    */
   private static int simplePartition(TestInteger[] array, int p, int r) {
     TestInteger pivot = array[r];
@@ -52,6 +56,8 @@ public class Quicksorts {
 
   /**
    * Like simpleQuicksort, but the pivot is chosen at random.
+   *
+   * @author Joe Walbran
    */
   public static void randomizedQuicksort(TestInteger[] array, int p, int r) {
     if (p < r) {
@@ -63,6 +69,8 @@ public class Quicksorts {
 
   /**
    * Like simplePartition, but the pivot is chosen at random.
+   *
+   * @author Joe Walbran
    */
   private static int randomizedPartition(TestInteger[] array, int p, int r) {
     int pivotIndex = ThreadLocalRandom.current().nextInt(p, r+1);

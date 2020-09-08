@@ -14,6 +14,8 @@ class Main {
   /**
    * An ordered pair consisting of a sorting algorithm and a human-readable
    * name for that sorting algorithm.
+   *
+   * @author Joe Walbran
    */
   private static class SortingAlgorithmWithName {
     Consumer<TestInteger[]> algorithm;
@@ -27,6 +29,9 @@ class Main {
     }
   }
 
+  /**
+   * @author Tyler Rowland, Joe Walbran
+   */
   public static void main(String[] args) {
     SortingAlgorithmWithName[] algorithms = {
       new SortingAlgorithmWithName(
@@ -111,6 +116,8 @@ class Main {
    *
    * This function doesn't return anything, but it does print its results to
    * the standard output.
+   *
+   * @author Equal contributions from all partners
    */
   public static void testSorting(
       TestInteger[] arrayToSort,
@@ -168,6 +175,8 @@ class Main {
 
   /**
    * Takes a TestInteger[] and returns true if sorted and false if not.
+   *
+   * @author Elk Oswood
    */
   public static boolean isSorted(TestInteger[] array) {
     for (int i = 0; i < array.length-1; i++) {
@@ -181,6 +190,8 @@ class Main {
   /**
    * Generate an array of a specified length whose elements are
    * random TestIntegers between one and a million (inclusive).
+   *
+   * @author Equal contributions from all partners
    */
   public static TestInteger[] randomArray(int length) {
     TestInteger[] result = new TestInteger[length];
@@ -194,6 +205,8 @@ class Main {
   /**
    * Generate an array of the length given, starting at startingValue
    * and increasing by one.
+   *
+   * @author Elk Oswood
    */
    public static TestInteger[] orderedArray(int length, int startingValue) {
      TestInteger[] result = new TestInteger[length];

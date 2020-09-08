@@ -1,3 +1,6 @@
+/**
+ * @author Elk Oswood, Joe Walbran
+ */
 public class TestInteger implements Comparable<TestInteger> {
   public int value;
 
