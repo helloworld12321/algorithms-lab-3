@@ -96,24 +96,14 @@ class Main {
       TestInteger[] arrayToSort,
       SortingAlgorithmWithName[] algorithmsAndNames) {
 
-    class Result {
-      boolean didSucceed;
-      long millis;
-      long numberOfComparisons;
-
-      Result(boolean didSucceed, long millis, long numberOfComparisons) {
-        this.didSucceed = didSucceed;
-        this.millis = millis;
-        this.numberOfComparisons = numberOfComparisons;
-      }
-    }
-
     // We could always print out the results as we go, but I'd like to put all
     // of the success-and-failure messages in one place and all of the
     // performace metrics in another place. (It's easier to read that way 🙂)
     // In order to do that, we need to keep track of the behavior of each
     // algorithm and then print them all out at the end.
-    Result[] results = new Result[algorithmsAndNames.length];
+    boolean[] successOrFailures = new boolean[algorithmsAndNames.length];
+    long[] timesInMillis = new long[algorithmsAndNames.length];
+    long[] numbersOfComparisons = new long[algorithmsAndNames.length];
 
     for (int i = 0; i < algorithmsAndNames.length; i++) {
       Consumer<TestInteger[]> algorithm = algorithmsAndNames[i].algorithm;
@@ -130,16 +120,15 @@ class Main {
       algorithm.accept(copyOfArray);
       long endTime = System.currentTimeMillis();
 
-      results[i] = new Result(
-        isSorted(copyOfArray),
-        endTime - startTime,
-        TestInteger.counter);
+      successOrFailures[i] = isSorted(copyOfArray);
+      timesInMillis[i] = endTime - startTime;
+      numbersOfComparisons[i] = TestInteger.counter;
     }
 
     // Now, print out all of the results.
 
-    for (int i = 0; i < results.length; i++) {
-      if (results[i].didSucceed) {
+    for (int i = 0; i < algorithmsAndNames.length; i++) {
+      if (successOrFailures[i]) {
         System.out.printf("\tThe %s worked.\n", algorithmsAndNames[i].name);
       } else {
         System.out.printf("\tThe %s failed :(\n", algorithmsAndNames[i].name);
@@ -148,12 +137,12 @@ class Main {
 
     System.out.println("\t---");
 
-    for (int i = 0; i < results.length; i++) {
+    for (int i = 0; i < algorithmsAndNames.length; i++) {
       System.out.printf(
         "\tThe %s ran in %d milliseconds and took %d comparisons\n",
         algorithmsAndNames[i].name,
-        results[i].millis,
-        results[i].numberOfComparisons);
+        timesInMillis[i],
+        numbersOfComparisons[i]);
     }
   }
 
