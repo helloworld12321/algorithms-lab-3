@@ -1,5 +1,14 @@
 import java.util.*;
-import java.util.function.*;
+
+// I'd use java.util.Random, but only ThreadLocalRandom provides a two-argument
+// version nextInt method.
+// (If you use java.util.Random.nextInt, you can specify the upper bound, but
+// the lower bound is always zero. Yes, I could always write something like
+// nextInt(upperBound - lowerBound) + lowerBound,
+// but that's a bit obscure and not quite as self-documenting ¯\_(ツ)_/¯)
+import java.util.concurrent.ThreadLocalRandom;
+
+import java.util.function.Consumer;
 
 class Main {
   /**
@@ -21,8 +30,13 @@ class Main {
   public static void main(String[] args) {
     SortingAlgorithmWithName[] algorithms = {
       new SortingAlgorithmWithName(
-        array -> { Quicksorts.simpleQuicksort(array, 0, array.length - 1); },
+        array -> { Quicksorts.simpleQuicksort(array, 0, array.length-1); },
         "simple quicksort"),
+
+      new SortingAlgorithmWithName(
+        array -> { Quicksorts.randomizedQuicksort(array, 0, array.length-1); },
+        "randomized quicksort"),
+
       new SortingAlgorithmWithName(
         Arrays::sort,
         "timsort"),
@@ -45,10 +59,12 @@ class Main {
     System.out.println("=== Testing sorting a multiple-sorted array (10 sorted sections):");
     for (int trial = 1; trial <= 5; trial++) {
       System.out.println("Trial " + trial + ":");
+
       TestInteger[] multipleSortedArray10 = new TestInteger[10_000];
       for (int i = 0; i < 10; i++) {
-        TestInteger[] sortedSubarray =
-          orderedArray(1_000, getRandomIntInclusive(1, 1_000_000));
+        TestInteger[] sortedSubarray = orderedArray(
+          1_000,
+          ThreadLocalRandom.current().nextInt(1, 1_000_000+1));
         System.arraycopy(
           // Copy from the subarray (starting at the beginning),
           sortedSubarray,
@@ -59,6 +75,7 @@ class Main {
           // all 1_000 elements of the subarray.
           1_000);
       }
+
       testSorting(multipleSortedArray10, algorithms);
     }
     System.out.println();
@@ -66,10 +83,12 @@ class Main {
     System.out.println("=== Testing sorting a multiple-sorted array (100 sorted sections):");
     for (int trial = 1; trial <= 5; trial++) {
       System.out.println("Trial " + trial + ":");
+
       TestInteger[] multipleSortedArray100 = new TestInteger[10_000];
       for (int i = 0; i < 100; i++) {
-        TestInteger[] sortedSubarray =
-          orderedArray(100, getRandomIntInclusive(1, 1_000_000));
+        TestInteger[] sortedSubarray = orderedArray(
+          100,
+          ThreadLocalRandom.current().nextInt(1, 1_000_000+1));
         System.arraycopy(
           // Copy from the subarray (starting at the beginning),
           sortedSubarray,
@@ -80,6 +99,7 @@ class Main {
           // all 100 elements of the subarray.
           100);
       }
+
       testSorting(multipleSortedArray100, algorithms);
     }
   }
@@ -150,8 +170,8 @@ class Main {
    * Takes a TestInteger[] and returns true if sorted and false if not.
    */
   public static boolean isSorted(TestInteger[] array) {
-    for (int i = 0; i < array.length - 1; i++) {
-      if (array[i].compareTo(array[i + 1]) > 0) {
+    for (int i = 0; i < array.length-1; i++) {
+      if (array[i].compareTo(array[i+1]) > 0) {
         return false;
       }
     }
@@ -165,19 +185,10 @@ class Main {
   public static TestInteger[] randomArray(int length) {
     TestInteger[] result = new TestInteger[length];
     for (int i = 0; i < length; i++) {
-      result[i] = new TestInteger(getRandomIntInclusive(1, 1_000_000));
+      result[i] =
+        new TestInteger(ThreadLocalRandom.current().nextInt(1, 1_000_000+1));
     }
     return result;
-  }
-
-  /**
-   * Return a random integer in the range { min, min+1, ..., max }.
-   *
-   * Source:
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-   */
-  public static int getRandomIntInclusive(int min, int max) {
-    return (int)Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   /**

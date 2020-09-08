@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * This class's static methods are various implementations of the quicksort
  * algorithm.
@@ -45,6 +47,44 @@ public class Quicksorts {
     TestInteger temp = array[i+1];
     array[i+1]=array[r];
     array[r]=temp;
+    return i+1;
+  }
+
+  /**
+   * Like simpleQuicksort, but the pivot is chosen at random.
+   */
+  public static void randomizedQuicksort(TestInteger[] array, int p, int r) {
+    if (p < r) {
+      int pivotLocation = randomizedPartition(array, p, r);
+      randomizedQuicksort(array, p, pivotLocation-1);
+      randomizedQuicksort(array, pivotLocation+1, r);
+    }
+  }
+
+  /**
+   * Like simplePartition, but the pivot is chosen at random.
+   */
+  private static int randomizedPartition(TestInteger[] array, int p, int r) {
+    int pivotIndex = ThreadLocalRandom.current().nextInt(p, r+1);
+    TestInteger pivot = array[pivotIndex];
+    // Move the pivot to the back of the sub-range.
+    array[pivotIndex] = array[r];
+    array[r] = pivot;
+
+    int i = p-1;
+    int j;
+    for(j = p; j <= r-1; j++){
+      if(array[j].compareTo(pivot) <= 0){
+        i = i+1;
+        TestInteger temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+
+    TestInteger temp = array[i+1];
+    array[i+1] = array[r];
+    array[r] = temp;
     return i+1;
   }
 }
