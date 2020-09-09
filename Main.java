@@ -43,6 +43,14 @@ class Main {
         "randomized quicksort"),
 
       new SortingAlgorithmWithName(
+        array -> { Quicksorts.medianOfThreeQuicksort(array, 0, array.length-1); },
+        "median-of-three quicksort"),
+
+      new SortingAlgorithmWithName(
+        array -> { Quicksorts.quicksortWithFallback(array, 0, array.length-1); },
+        "quicksort with a fallback to insertion sort"),
+
+      new SortingAlgorithmWithName(
         Arrays::sort,
         "timsort"),
     };
@@ -208,11 +216,11 @@ class Main {
    *
    * @author Elk Oswood
    */
-   public static TestInteger[] orderedArray(int length, int startingValue) {
-     TestInteger[] result = new TestInteger[length];
-     for (int i = 0; i < length; i++) {
-       result[i] = new TestInteger(i + startingValue);
-     }
-     return result;
-   }
+  public static TestInteger[] orderedArray(int length, int startingValue) {
+    TestInteger[] result = new TestInteger[length];
+    for (int i = 0; i < length; i++) {
+      result[i] = new TestInteger(i + startingValue);
+    }
+    return result;
+  }
 }

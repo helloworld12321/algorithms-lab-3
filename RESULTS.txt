@@ -1,0 +1,247 @@
+=== Testing sorting an entirely random array:
+Trial 1:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 3 milliseconds and took 157582 comparisons
+	The randomized quicksort ran in 4 milliseconds and took 167498 comparisons
+	The median-of-three quicksort ran in 6 milliseconds and took 146569 comparisons
+	The quicksort with a fallback to insertion sort ran in 1 milliseconds and took 158367 comparisons
+	The timsort ran in 6 milliseconds and took 130425 comparisons
+Trial 2:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 0 milliseconds and took 169513 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 170507 comparisons
+	The median-of-three quicksort ran in 3 milliseconds and took 157354 comparisons
+	The quicksort with a fallback to insertion sort ran in 1 milliseconds and took 170275 comparisons
+	The timsort ran in 2 milliseconds and took 130449 comparisons
+Trial 3:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 1 milliseconds and took 180336 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 161863 comparisons
+	The median-of-three quicksort ran in 2 milliseconds and took 149904 comparisons
+	The quicksort with a fallback to insertion sort ran in 1 milliseconds and took 180995 comparisons
+	The timsort ran in 2 milliseconds and took 130384 comparisons
+Trial 4:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 1 milliseconds and took 168216 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 164718 comparisons
+	The median-of-three quicksort ran in 3 milliseconds and took 150418 comparisons
+	The quicksort with a fallback to insertion sort ran in 1 milliseconds and took 168865 comparisons
+	The timsort ran in 2 milliseconds and took 130385 comparisons
+Trial 5:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 1 milliseconds and took 163318 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 175119 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 155580 comparisons
+	The quicksort with a fallback to insertion sort ran in 1 milliseconds and took 164067 comparisons
+	The timsort ran in 2 milliseconds and took 130396 comparisons
+
+=== Testing sorting an already-sorted array:
+Trial 1:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 124 milliseconds and took 50004999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 161689 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 159560 comparisons
+	The quicksort with a fallback to insertion sort ran in 111 milliseconds and took 50004984 comparisons
+	The timsort ran in 0 milliseconds and took 19998 comparisons
+Trial 2:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 113 milliseconds and took 50004999 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 160722 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 153407 comparisons
+	The quicksort with a fallback to insertion sort ran in 110 milliseconds and took 50004984 comparisons
+	The timsort ran in 1 milliseconds and took 19998 comparisons
+Trial 3:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 115 milliseconds and took 50004999 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 168304 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 156352 comparisons
+	The quicksort with a fallback to insertion sort ran in 110 milliseconds and took 50004984 comparisons
+	The timsort ran in 0 milliseconds and took 19998 comparisons
+Trial 4:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 115 milliseconds and took 50004999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 157625 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 166899 comparisons
+	The quicksort with a fallback to insertion sort ran in 111 milliseconds and took 50004984 comparisons
+	The timsort ran in 0 milliseconds and took 19998 comparisons
+Trial 5:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 113 milliseconds and took 50004999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 172651 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 160017 comparisons
+	The quicksort with a fallback to insertion sort ran in 109 milliseconds and took 50004984 comparisons
+	The timsort ran in 0 milliseconds and took 19998 comparisons
+
+=== Testing sorting a multiple-sorted array (10 sorted sections):
+Trial 1:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 30 milliseconds and took 13016999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 166214 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 156388 comparisons
+	The quicksort with a fallback to insertion sort ran in 29 milliseconds and took 13016909 comparisons
+	The timsort ran in 0 milliseconds and took 20273 comparisons
+Trial 2:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 37 milliseconds and took 16016999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 165900 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 156152 comparisons
+	The quicksort with a fallback to insertion sort ran in 35 milliseconds and took 16016909 comparisons
+	The timsort ran in 0 milliseconds and took 20335 comparisons
+Trial 3:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 25 milliseconds and took 11018999 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 169585 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 151256 comparisons
+	The quicksort with a fallback to insertion sort ran in 24 milliseconds and took 11018894 comparisons
+	The timsort ran in 0 milliseconds and took 20204 comparisons
+Trial 4:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 45 milliseconds and took 20012999 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 170685 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 151830 comparisons
+	The quicksort with a fallback to insertion sort ran in 44 milliseconds and took 20012939 comparisons
+	The timsort ran in 0 milliseconds and took 20276 comparisons
+Trial 5:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 35 milliseconds and took 15017999 comparisons
+	The randomized quicksort ran in 0 milliseconds and took 188607 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 156291 comparisons
+	The quicksort with a fallback to insertion sort ran in 33 milliseconds and took 15017924 comparisons
+	The timsort ran in 0 milliseconds and took 20318 comparisons
+
+=== Testing sorting a multiple-sorted array (100 sorted sections):
+Trial 1:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 10 milliseconds and took 4811031 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 158438 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 151148 comparisons
+	The quicksort with a fallback to insertion sort ran in 10 milliseconds and took 4810234 comparisons
+	The timsort ran in 0 milliseconds and took 24732 comparisons
+Trial 2:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 8 milliseconds and took 3486095 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 166813 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 155780 comparisons
+	The quicksort with a fallback to insertion sort ran in 8 milliseconds and took 3484982 comparisons
+	The timsort ran in 0 milliseconds and took 24520 comparisons
+Trial 3:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 7 milliseconds and took 3228667 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 160648 comparisons
+	The median-of-three quicksort ran in 1 milliseconds and took 154544 comparisons
+	The quicksort with a fallback to insertion sort ran in 7 milliseconds and took 3227857 comparisons
+	The timsort ran in 0 milliseconds and took 24506 comparisons
+Trial 4:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 9 milliseconds and took 4139935 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 175049 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 152740 comparisons
+	The quicksort with a fallback to insertion sort ran in 10 milliseconds and took 4138960 comparisons
+	The timsort ran in 0 milliseconds and took 24545 comparisons
+Trial 5:
+	The simple quicksort worked.
+	The randomized quicksort worked.
+	The median-of-three quicksort worked.
+	The quicksort with a fallback to insertion sort worked.
+	The timsort worked.
+	---
+	The simple quicksort ran in 12 milliseconds and took 4277399 comparisons
+	The randomized quicksort ran in 1 milliseconds and took 163196 comparisons
+	The median-of-three quicksort ran in 0 milliseconds and took 152885 comparisons
+	The quicksort with a fallback to insertion sort ran in 9 milliseconds and took 4276634 comparisons
+	The timsort ran in 0 milliseconds and took 24397 comparisons
